@@ -14,23 +14,31 @@ class Generator():
 
 class UlamNumbersGenerator(Generator):
     def __init__(self):
-        self.sequence = [1, 2, 3]
+        self.sequence = [1, 2]
 
     def get_sequence(self, length):
-        first = 0
-        second = 1
+        if length > len(self.sequence):
+            for _ in range(length - len(self.sequence)):
+                possible_members = []
+                for j in range(len(self.sequence)):
+                    for p in range(j + 1, len(self.sequence)):
+                        possible_members.append(
+                            self.sequence[j] + self.sequence[p])
+                possible_members = [var for var in possible_members if all(
+                    i < var for i in self.sequence) and possible_members.count(var) == 1]
 
-        for i in range(length - 2):
-            if i % 2 == 0:
-                self.sequence.append(
-                    self.sequence[first] + self.sequence[second + 1])
-                second += 1
-            else:
-                self.sequence.append(
-                    self.sequence[first + 1] + self.sequence[second + 1])
-                first += 1
-                second += 1
-        return self.sequence
+                self.sequence.append(min(possible_members))
+            return self.sequence
+
+        elif length < len(self.sequence):
+            return self.sequence[:length]
+
+        else:
+            return self.sequence
+
+    def get_random_number(self, max_number_of_sequnce):
+        ulam_sequence = self.get_sequence(max_number_of_sequnce)
+        return random.choice(ulam_sequence)
 
     def get_random_number(self, max_number_of_sequnce):
         ulam_sequence = self.get_sequence(max_number_of_sequnce)
@@ -52,7 +60,7 @@ class PrimeNumbersGenerator(Generator):
 
             number += 1
 
-        return self.sequence 
+        return self.sequence
 
     def get_random_number(self, max_number_of_sequnce):
         prime_sequence = self.get_sequence(max_number_of_sequnce)
