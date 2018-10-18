@@ -29,16 +29,8 @@ class UlamNumbersGenerator(Generator):
 
                 self.sequence.append(min(possible_members))
             return self.sequence
-
-        elif length < len(self.sequence):
-            return self.sequence[:length]
-
         else:
-            return self.sequence
-
-    def get_random_number(self, max_number_of_sequnce):
-        ulam_sequence = self.get_sequence(max_number_of_sequnce)
-        return random.choice(ulam_sequence)
+            return self.sequence[:length]
 
     def get_random_number(self, max_number_of_sequnce):
         ulam_sequence = self.get_sequence(max_number_of_sequnce)
