@@ -1,1 +1,1 @@
-Project created by Denys Ivan, Chocolate and Captain. @SukaBlyat All rights reserved. Fuck Andriy Roman!
+Project created by Denys Ivan, Chocolate and Captain. @FAR All rights reserved. Fuck Andriy Roman!
