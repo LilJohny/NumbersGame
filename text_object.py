@@ -20,3 +20,6 @@ class TextObject():
     def get_surface(self, text):
         text_surface = self.font.render(text, False, self.color)
         return (text_surface, text_surface.get_rect())
+
+    def update(self):
+        pass
