@@ -35,3 +35,32 @@ class UlamNumbersGenerator(Generator):
     def get_random_number(self, max_number_of_sequnce):
         ulam_sequence = self.get_sequence(max_number_of_sequnce)
         return random.choice(ulam_sequence)
+
+
+class PrimeNumbersGenerator(Generator):
+    def __init__(self, *args, **kwargs):
+        self.sequence = [2]
+
+    def get_sequence(self, length):
+        self.sequence = [2]
+
+        number = 3
+
+        while len(self.sequence) < length:
+            if PrimeNumbersGenerator.isPrime(number):
+                self.sequence.append(number)
+
+            number += 1
+
+        return self.sequence 
+
+    def get_random_number(self, max_number_of_sequnce):
+        prime_sequence = self.get_sequence(max_number_of_sequnce)
+        return random.choice(prime_sequence)
+
+    def isPrime(number):
+        for factor in range(2, (number//2)+1):
+            if(number % factor == 0):
+                return False
+
+        return True
