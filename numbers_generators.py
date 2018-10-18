@@ -42,15 +42,19 @@ class PrimeNumbersGenerator(Generator):
         self.sequence = [2]
 
     def get_sequence(self, length):
-        self.sequence = [2]
+        if(length > len(self.sequence)):
+            last = self.sequence[len(self.sequence) - 1]
 
-        number = 3
+        else:
+            return self.sequence[:length]
+
+        number = last
 
         while len(self.sequence) < length:
-            if PrimeNumbersGenerator.isPrime(number):
-                self.sequence.append(number)
-
             number += 1
+
+            if self.isPrime(number):
+                self.sequence.append(number)
 
         return self.sequence
 
@@ -58,6 +62,7 @@ class PrimeNumbersGenerator(Generator):
         prime_sequence = self.get_sequence(max_number_of_sequnce)
         return random.choice(prime_sequence)
 
+    @staticmethod
     def isPrime(number):
         for factor in range(2, (number//2)+1):
             if(number % factor == 0):
