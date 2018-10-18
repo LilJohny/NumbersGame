@@ -69,3 +69,30 @@ class PrimeNumbersGenerator(Generator):
                 return False
 
         return True
+
+class Lucky_Numbers_Generator(Generator):
+    def __init__(self):
+        self.happies = []
+        self.create_sequence()
+
+    def ishappy(self, n):
+        cache = []
+        while n != 1:
+            n = sum(int(i)**2 for i in str(n))
+            if n in cache:
+                return False
+            cache.append(n)
+        return True
+
+    def get_sequence(self,  length_of_list):
+        return self.happies[:length_of_list]
+
+    def get_random_number(self, max_number_of_sequnce):
+        happies = self.get_sequence(max_number_of_sequnce)
+        return random.choice(happies)
+
+    def create_sequence(self):
+        for i in range(1, 1001):
+            if self.ishappy(i):
+                self.happies.append(i)
+        return self.happies
