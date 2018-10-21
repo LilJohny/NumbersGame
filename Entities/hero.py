@@ -5,11 +5,12 @@ pygame.init()
 
 
 class Hero(Creature):
-    def __init__(self, image_name, x, y, full_health, damage, speed, background):
+    def __init__(self, image_name, x, y, height, width, full_health, damage, speed, background):
         self.coordinates = [x, y]
         self.max_health = full_health
         self.current_health = full_health
         self.image = pygame.image.load(image_name)
+        self.image = pygame.transform.scale(self.image, (width, height))
         self.max_damage = damage
         self.background = background
         self.speed = speed

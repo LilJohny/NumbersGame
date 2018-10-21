@@ -15,6 +15,7 @@ class Background:
             self.levels.append(image)
 
     def draw(self, level_number=0):
+        self.window.fill((0, 0, 0))
         self.window.blit(self.levels[level_number], (0, 0))
         pygame.display.update()
         self.current_level = level_number
