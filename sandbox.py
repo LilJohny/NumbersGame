@@ -11,7 +11,6 @@ def main():
     hero = Hero('sprites/hero.png', 0, 0, 100, 80, 100, 20, 5, background)
     hero.draw()
     playing = True
-    enemy =
     while playing:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
