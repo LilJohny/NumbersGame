@@ -1,6 +1,7 @@
 import pygame
 import random
 
+from Entities.battle import Battle
 from Entities.enemy import Enemy
 
 pygame.init()
@@ -36,3 +37,9 @@ class Background:
         for enemy in self.enemies:
             enemy.draw()
         self.current_level = level_number
+
+    def start_battle(self, hero, opponent):
+        print("Start Battle")
+        #battle = Battle(hero, opponent, self.window, 'sprites/battle.png')
+        self.window.fill((0, 0, 0))
+        pygame.display.update()
