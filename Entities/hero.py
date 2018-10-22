@@ -10,8 +10,6 @@ class Hero(Creature):
         self.max_health = full_health
         self.current_health = full_health
         self.image = pygame.image.load(image_name)
-        self.width = width
-        self.height = height
         self.image = pygame.transform.scale(self.image, (width, height))
         self.max_damage = damage
         self.background = background
