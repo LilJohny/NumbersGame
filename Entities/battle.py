@@ -2,7 +2,7 @@ import pygame
 from Entities.enemy import Enemy
 from Entities.hero import Hero
 from text_object import TextObject
-
+from numbers_generators import Lucky_Numbers_Generator,PrimeNumbersGenerator,UlamNumbersGenerator
 pygame.init()
 
 
@@ -19,11 +19,21 @@ class Battle:
         self.window.blit(self.hero.image, (
             resolution[0] // 4 - self.hero.image.get_width() // 2,
             resolution[1] // 2 - self.hero.image.get_height() // 2))
-        hero_name = TextObject(self.hero.coordinates[0], self.hero.coordinates[1] - 15, lambda: 'Andriy Roman',
-                               (211, 23, 23, 1), 'Consolas', 12)
-        hero_name.draw(window)
+        hero_name = TextObject(resolution[0] // 4 - self.hero.image.get_width() // 2,
+                               resolution[1] // 2 - self.hero.image.get_height() // 2 - 20, lambda: 'Andriy Roman',
+                               (211, 23, 23, 1), 'Consolas', 20)
+        hero_name.draw(window, centralized=False)
+
+        self.window.blit(self.opponent.image, (3 * resolution[0] // 4 - self.opponent.image.get_width() // 2,
+                                               resolution[1] // 2 - self.opponent.image.get_height() // 2))
+        enemy_name = TextObject(3 * resolution[0] // 4 - self.opponent.image.get_width() // 2,
+                                resolution[1] // 2 - self.opponent.image.get_height() // 2 - 20,
+                                lambda: self.opponent.name, (211, 23, 23, 1), 'Consolas', 20)
+        enemy_name.draw(window, centralized=False)
         pygame.display.update()
-        #self.window.blit(self.opponent.image, (3 * resolution[0] // 4 - self.opponent.image.get_width() // 2,
-          #                                     resolution[1] // 2 - self.opponent.image.get_height() // 2))
-        #pygame.display.update()
-        pygame.time.delay(1000000)
+        ulam_generator =
+    def display_next_question(self):
+
+    def execute(self):
+        while self.hero.current_health>0 and self.opponent.health>0:
+

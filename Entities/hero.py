@@ -30,5 +30,6 @@ class Hero(Creature):
 
     def check_if_battle_needed(self):
         for enemy in self.background.enemies:
-            if(abs(self.coordinates[0] - enemy.coordinates[0]) < 100 and abs(self.coordinates[1] - enemy.coordinates[1]) < 120):
+            if abs(self.coordinates[0] - enemy.coordinates[0]) < 100 and abs(
+                    self.coordinates[1] - enemy.coordinates[1]) < 120:
                 self.background.start_battle(self, enemy)

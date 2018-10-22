@@ -5,7 +5,8 @@ from Entities.hero import Hero
 
 def main():
     pygame.init()
-    window = pygame.display.set_mode((1918, 1074))
+    #window = pygame.display.set_mode((1650, 928))
+    window = pygame.display.set_mode((1800, 850), pygame.FULLSCREEN)
     pygame.display.set_caption('FAR')
 
     background = Background(['sprites/bg1.png', 'sprites/bg2.png', 'sprites/bg3.png', 'sprites/bg4.png'], (1918, 1074),
