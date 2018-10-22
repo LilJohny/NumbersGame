@@ -31,6 +31,10 @@ class Background:
             self.levels.append(image)
 
     def draw(self, level_number=0):
+        '''
+        object,number -> image
+        This function creates a window of current level.
+        '''
         self.window.fill((0, 0, 0))
         self.window.blit(self.levels[level_number], (0, 0))
         for enemy in self.enemies:
