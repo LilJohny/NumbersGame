@@ -15,4 +15,3 @@ class Enemy(Creature):
 
     def draw(self):
         self.window.blit(self.image, self.coordinates)
-        pygame.display.update()

@@ -19,10 +19,8 @@ class Hero(Creature):
         self.background.window.blit(self.image, self.coordinates)
         pygame.display.update()
 
-    def move(self, x, y, enemies):  # x is difference between current position x and new, y the same
+    def move(self, x, y):  # x is difference between current position x and new, y the same
         self.coordinates[0] += x
         self.coordinates[1] -= y
         self.background.draw(self.background.current_level)
-        for enemy in enemies:
-            enemy.draw()
         self.draw()
