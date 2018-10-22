@@ -2,7 +2,8 @@ import pygame
 from Entities.enemy import Enemy
 from Entities.hero import Hero
 from text_object import TextObject
-from numbers_generators import Lucky_Numbers_Generator,PrimeNumbersGenerator,UlamNumbersGenerator
+from numbers_generators import Lucky_Numbers_Generator, PrimeNumbersGenerator, UlamNumbersGenerator
+
 pygame.init()
 
 
@@ -28,7 +29,7 @@ class Battle:
 
         hint = TextObject(850, 600, lambda: hint_text, (255, 255, 255, 1), 'Consolas', 30)
         hint.draw(window, centralized=True)
-        
+
         hero_name = TextObject(resolution[0] // 4 - self.hero.image.get_width() // 2,
                                resolution[1] // 2 - self.hero.image.get_height() // 2 - 20, lambda: 'Andriy Roman',
                                (211, 23, 23, 1), 'Consolas', 20)
@@ -55,20 +56,20 @@ class Battle:
         question = TextObject(200, 600, lambda: text, (255, 255, 255, 1), 'Consolas', 30)
 
     def execute(self):
-        while self.hero.current_health>0 and self.opponent.health>0:
+        while self.hero.current_health > 0 and self.opponent.health > 0:
             self.display_next_question(5)
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_1:
                         self.make_damage()
-                        
+
                     elif event.key == pygame.K_2:
                         self.get_damage()
-                        
+
                     elif event.key == pygame.K_3:
                         self.get_damage()
-                    
-        if(self.opponent.health > 0):
+
+        if self.opponent.health <= 0:
             self.win_battle()
 
         else:
@@ -84,9 +85,9 @@ class Battle:
         print('Battle lost')
 
     def win_battle(self):
+        self.hero.winner = True
         index = self.hero.background.enemies.index(self.opponent)
-        del(self.hero.background.enemies[index])
+        del (self.hero.background.enemies[index])
         self.hero.background.draw()
         pygame.display.update()
-
 

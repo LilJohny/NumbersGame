@@ -9,6 +9,7 @@ class Hero(Creature):
         self.coordinates = [x, y]
         self.max_health = full_health
         self.current_health = full_health
+        self.winner = False
         self.image = pygame.image.load(image_name)
         self.width = width
         self.height = height
