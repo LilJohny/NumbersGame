@@ -10,6 +10,10 @@ class TextObject:
         self.bounds = self.get_surface(text_function())
 
     def draw(self, surface, centralized=False):
+        '''
+        object,image -> text
+        This function returns text message on the playground and moves it.
+        '''
         text_surface, self.bounds = self.get_surface(self.text_func())
         if centralized:
             pos = (self.position[0] - self.bounds.width // 2, self.position[1])
@@ -18,6 +22,10 @@ class TextObject:
         surface.blit(text_surface, pos)
 
     def get_surface(self, text):
+        '''
+        object,text -> text
+        This funciton returns text surface for text massage.
+        '''
         text_surface = self.font.render(text, False, self.color)
         return text_surface, text_surface.get_rect()
 

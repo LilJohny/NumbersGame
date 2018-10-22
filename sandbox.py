@@ -4,6 +4,9 @@ from Entities.hero import Hero
 
 
 def main():
+    '''
+    This function creates hero,background and creates the methods for controlling hero.It lets the player command it.
+    '''
     pygame.init()
     window = pygame.display.set_mode((1918, 1074))
     pygame.display.set_caption('FAR')

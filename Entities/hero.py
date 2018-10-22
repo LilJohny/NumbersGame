@@ -16,10 +16,18 @@ class Hero(Creature):
         self.speed = speed
 
     def draw(self):
+        '''
+        object -> image
+        This function creates hero on the playground.
+        '''
         self.background.window.blit(self.image, self.coordinates)
         pygame.display.update()
 
     def move(self, x, y):  # x is difference between current position x and new, y the same
+        '''
+        object,number,number -> moveable hero
+        This fucntion calculates the difference with previous x and y with new ones and makes the hero move across the playground.
+        '''
         self.coordinates[0] += x
         self.coordinates[1] -= y
         self.background.draw(self.background.current_level)

@@ -14,4 +14,8 @@ class Enemy(Creature):
         self.window = window
 
     def draw(self):
+        '''
+        object -> image
+        This fucntion creates enemies on the playground.
+        '''
         self.window.blit(self.image, self.coordinates)
