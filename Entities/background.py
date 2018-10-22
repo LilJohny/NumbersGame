@@ -41,5 +41,4 @@ class Background:
     def start_battle(self, hero, opponent):
         print("Start Battle")
         battle = Battle(hero, opponent, self.window, 'sprites/battle.png')
-        battle.execute()
-        #pygame.display.update()
+        #battle.execute()

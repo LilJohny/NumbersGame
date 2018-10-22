@@ -16,11 +16,11 @@ class Battle:
         self.battle_image = pygame.transform.scale(self.battle_image, resolution)
         self.window.fill((0, 0, 0))
         self.window.blit(self.battle_image, (0, 0))
-        self.window.blit(self.hero.image, (
-            resolution[0] // 4 - self.hero.image.get_width() // 2,
-            resolution[1] // 2 - self.hero.image.get_height() // 2))
-        hero_name = TextObject(resolution[0] // 4 - self.hero.image.get_width() // 2,
-                               resolution[1] // 2 - self.hero.image.get_height() // 2 - 20, lambda: 'Andriy Roman',
+        self.window.blit(self.hero.battle_image, (
+            resolution[0] // 4 - self.hero.battle_image.get_width() // 2,
+            resolution[1] // 2 - self.hero.battle_image.get_height() // 2))
+        hero_name = TextObject(resolution[0] // 4 - self.hero.battle_image.get_width() // 2,
+                               resolution[1] // 2 - self.hero.battle_image.get_height() // 2 - 20, lambda: 'Andriy Roman',
                                (211, 23, 23, 1), 'Consolas', 20)
         hero_name.draw(window, centralized=False)
 
@@ -31,9 +31,5 @@ class Battle:
                                 lambda: self.opponent.name, (211, 23, 23, 1), 'Consolas', 20)
         enemy_name.draw(window, centralized=False)
         pygame.display.update()
-        ulam_generator =
-    def display_next_question(self):
 
-    def execute(self):
-        while self.hero.current_health>0 and self.opponent.health>0:
 
