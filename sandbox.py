@@ -6,7 +6,7 @@ from Entities.hero import Hero
 def main():
     pygame.init()
     #window = pygame.display.set_mode((1650, 928))
-    window = pygame.display.set_mode((1800, 850), pygame.FULLSCREEN)
+    window = pygame.display.set_mode((1800, 850))
     pygame.display.set_caption('FAR')
 
     background = Background(['sprites/bg1.png', 'sprites/bg2.png', 'sprites/bg3.png', 'sprites/bg4.png'], (1918, 1074),
@@ -61,6 +61,10 @@ def main():
                             if stop_event.type == pygame.KEYUP and stop_event.key == event.key:
                                 moving = False
                                 break
+
+                elif event.key == pygame.K_ESCAPE:
+                    playing = False
+                    break
 
 
 if __name__ == '__main__':
