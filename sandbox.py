@@ -1,18 +1,16 @@
-import ctypes
-from Entities.Objects.text_object import TextObject
-import pygame
 import sys
+
+import pygame
+
+from Entities.Objects.text_object import TextObject
 from Entities.background import Background
 from Entities.hero import Hero
 from static import RIGHT, bg_images_paths, scale_screen_resolution, hero_sprites_paths
-from Entities.Objects.text_object import TextObject
 
 
 def main():
     pygame.init()
-    #user32 = ctypes.windll.user32
-    #screensize = user32.GetSystemMetrics(78), user32.GetSystemMetrics(79)
-    window = pygame.display.set_mode((1670, 924))#, pygame.FULLSCREEN)
+    window = pygame.display.set_mode((1536, 864), pygame.FULLSCREEN)
     pygame.display.set_caption('FAR')
 
     background = Background(bg_images_paths, scale_screen_resolution,
@@ -20,8 +18,8 @@ def main():
 
     background.draw()
 
-    hero = Hero(hero_sprites_paths, 0, 0, 100, 125, 100,
-                20,
+    hero = Hero(hero_sprites_paths, 0, 0, 100, 125, 2000,
+                1000,
                 40, background)
     hero.draw(RIGHT)
     clock = pygame.time.Clock()
@@ -92,7 +90,7 @@ def main():
                     if background.current_level == 4:
                         pygame.display.flip()
                         window.fill((0, 0, 0))
-                        win_obj = TextObject(825, 464, lambda: 'YOU ARE PROMOTED', (0, 255, 0, 1), 'Consolas', 70)
+                        win_obj = TextObject(780, 444, lambda: 'YOU ARE PROMOTED', (0, 255, 0, 1), 'Consolas', 70)
                         win_obj.draw(window, centralized=True)
                         pygame.display.update()
                         pygame.time.delay(2000)

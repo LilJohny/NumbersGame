@@ -9,7 +9,7 @@ DOWN = 'down'
 LOSE_TEXT = 'YOU ARE FIRED'
 
 CONSOLAS = 'Consolas'
-
+enemies_names = [['AttributeError', 'NameError', 'AttributeError'], [], [], []]
 RIGHT_ANSWER = 'RIGHT ANSWER!'
 scale_screen_resolution = (1918, 1074)
 
