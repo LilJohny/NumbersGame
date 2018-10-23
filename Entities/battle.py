@@ -109,7 +109,7 @@ class Battle:
         lose_obj = TextObject(780, 444, lambda: static.LOSE_TEXT, (255, 0, 0, 1), static.CONSOLAS, 70)
         lose_obj.draw(self.window, centralized=True)
         pygame.display.update()
-        pygame.time.delay(5000)
+        pygame.time.delay(2000)
         pygame.display.quit()
         pygame.quit()
         sys.exit()

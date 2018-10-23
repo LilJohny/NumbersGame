@@ -1,7 +1,7 @@
 import ctypes
-
+from Entities.Objects.text_object import TextObject
 import pygame
-
+import sys
 from Entities.background import Background
 from Entities.hero import Hero
 from static import RIGHT, bg_images_paths, scale_screen_resolution, hero_sprites_paths
@@ -91,6 +91,19 @@ def main():
                     hero.coordinates = [0, 0]
                     background.set_enemies_strength()
                     hero.move(1, 0)
+                    pygame.display.update()
+                    if background.current_level == 4:
+                        pygame.display.flip()
+                        window.fill((0, 0, 0))
+                        win_obj = TextObject(825, 464, lambda: 'YOU ARE PROMOTED', (0, 255, 0, 1), 'Consolas', 70)
+                        win_obj.draw(window, centralized=True)
+                        pygame.display.update()
+                        pygame.time.delay(2000)
+                        sys.exit()
+                    else:
+                        hero.coordinates = [0, 0]
+                        background.set_enemies_strength()
+                        background.draw(background.current_level)
                     pygame.display.update()
 
 
