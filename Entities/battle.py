@@ -27,8 +27,12 @@ class Battle:
         lucky_generator = Lucky_Numbers_Generator()
 
         self.generators = [ulam_generator, prime_generator, lucky_generator]
-        self.number = self.generate_number()
+
+        generator = random.choice(self.generators)
+        
+        self.number = generator.get_random_number(20)
         self.display_next_question(self.number)
+        self.previous_answer = generator.get_generator_name()
 
         pygame.display.update()
 
@@ -45,19 +49,17 @@ class Battle:
         while self.hero.current_health > 0 and self.opponent.health > 0:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
-                    self.number = self.generate_number()
-                    self.display_next_question(self.number)
-                    print(self.number)
+                    
                     pygame.display.update()
 
                     if event.key == pygame.K_1:
                         self.check_answer(self.number, self.generators[0])
 
-                    elif event.key == pygame.K_2:
-                        self.check_answer(self.number, self.generators[0])
+                    elif event.key == pygame.K_2: 
+                        self.check_answer(self.number, self.generators[1])
 
                     elif event.key == pygame.K_3:
-                        self.check_answer(self.number, self.generators[0])
+                        self.check_answer(self.number, self.generators[2])
 
         if self.opponent.health <= 0:
             self.win_battle()
@@ -67,27 +69,35 @@ class Battle:
 
     def check_answer(self, number, generator, length=20):
         if generator.is_from_sequence(number):
+            self.number = self.generate_number()
+            self.display_next_question(self.number)
+            print(self.number)
             self.make_damage()
         else:
+            self.number = self.generate_number()
+            self.display_next_question(self.number)
+            print(self.number)
             self.get_damage()
 
-        # TODO: output right answer
-
+        self.previous_answer = self.answer
         pygame.display.update()
 
     def generate_number(self, length=20):
         generator = random.choice(self.generators)
+        self.answer = generator.get_generator_name()
         return generator.get_random_number(length)
 
     def make_damage(self):
         self.opponent.health -= self.hero.max_damage
-        alert = TextObject(700, 700, lambda: 'RIGHT ANSWER!', (0, 255, 0, 1), 'Consolas', 30)
-        alert.draw(self.window)
+        alert = TextObject(825, 464, lambda: 'RIGHT ANSWER!', (0, 255, 0, 1), 'Consolas', 30)
+        alert.draw(self.window, centralized=True)
 
     def get_damage(self):
         self.hero.current_health -= self.opponent.damage
-        alert = TextObject(1400, 700, lambda: 'WRONG ANSWER!', (211, 23, 23, 1), 'Consolas', 30)
-        alert.draw(self.window)
+        alert1 = TextObject(825, 454, lambda: 'WRONG ANSWER!', (0, 0, 255, 1), 'Consolas', 30)
+        alert2 = TextObject(825, 474, lambda: self.previous_answer, (0, 0, 255, 1), 'Consolas', 30)
+        alert1.draw(self.window, centralized=True)
+        alert2.draw(self.window, centralized=True)
 
     def lose_battle(self):
         print('Battle lost')

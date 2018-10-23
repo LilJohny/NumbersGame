@@ -16,14 +16,8 @@ class Background:
         self.enemies_locations = [[(1000, 50), (220, 500), (300, 700)], [(600, 85), (1070, 270), (250, 600)],
                                   [(470, 180), (625, 600), (1050, 650)], [(1000, 20), (100, 500), (200, 700)]]
         self.window = window
-        enemy1 = Enemy(random.choice(self.enemies_sprites), self.enemies_locations[self.current_level][0][0],
-                       self.enemies_locations[self.current_level][0][1], 100, 120, 20, 10, 'Enemy1', self.window)
-        enemy2 = Enemy(random.choice(self.enemies_sprites), self.enemies_locations[self.current_level][1][0],
-                       self.enemies_locations[self.current_level][1][1], 100, 120, 20, 10, 'Enemy2', self.window)
-        enemy3 = Enemy(random.choice(self.enemies_sprites), self.enemies_locations[self.current_level][2][0],
-                       self.enemies_locations[self.current_level][2][1], 100, 120, 20, 10, 'Enemy3', self.window)
-        self.enemies = [enemy1, enemy2, enemy3]
         self.levels = []
+        self.set_enemies_strength()
 
         self.current_level = 0
         for image_name in image_names:
@@ -34,9 +28,19 @@ class Background:
     def draw(self, level_number=0):
         self.window.fill((0, 0, 0))
         self.window.blit(self.levels[level_number], (0, 0))
+        
         for enemy in self.enemies:
             enemy.draw()
-        self.current_level = level_number
+
+    def set_enemies_strength(self):
+        enemy1 = Enemy(random.choice(self.enemies_sprites), self.enemies_locations[self.current_level][0][0],
+                       self.enemies_locations[self.current_level][0][1], 100, 120, 20 * (self.current_level+1), 10 * (self.current_level+1), 'Enemy1', self.window)
+        enemy2 = Enemy(random.choice(self.enemies_sprites), self.enemies_locations[self.current_level][1][0],
+                       self.enemies_locations[self.current_level][1][1], 100, 120, 20 * (self.current_level+1), 10 * (self.current_level+1), 'Enemy2', self.window)
+        enemy3 = Enemy(random.choice(self.enemies_sprites), self.enemies_locations[self.current_level][2][0],
+                       self.enemies_locations[self.current_level][2][1], 100, 120, 20 * (self.current_level+1), 10 * (self.current_level+1), 'Enemy3', self.window)
+
+        self.enemies = [enemy1, enemy2, enemy3] 
 
     def start_battle(self, hero, opponent):
         print("Start Battle")

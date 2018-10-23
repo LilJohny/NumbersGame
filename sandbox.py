@@ -9,6 +9,8 @@ def main():
     # window = pygame.display.set_mode((1800, 850), pygame.FULLSCREEN)
     pygame.display.set_caption('FAR')
 
+    level = 0
+
     background = Background(['sprites/bg1.png', 'sprites/bg2.png', 'sprites/bg3.png', 'sprites/bg4.png'], (1918, 1074),
                             window)
     background.draw()
@@ -82,6 +84,12 @@ def main():
                 elif event.key == pygame.K_ESCAPE:
                     playing = False
                     break
+
+                if len(background.enemies) == 0:
+                    background.current_level += 1
+                    background.set_enemies_strength()
+                    background.draw(background.current_level)
+                    pygame.display.update()
 
 
 if __name__ == '__main__':
