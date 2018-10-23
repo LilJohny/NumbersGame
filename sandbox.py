@@ -5,13 +5,14 @@ import sys
 from Entities.background import Background
 from Entities.hero import Hero
 from static import RIGHT, bg_images_paths, scale_screen_resolution, hero_sprites_paths
+from Entities.Objects.text_object import TextObject
 
 
 def main():
     pygame.init()
-    user32 = ctypes.windll.user32
-    screensize = user32.GetSystemMetrics(78), user32.GetSystemMetrics(79)
-    window = pygame.display.set_mode(screensize, pygame.FULLSCREEN)
+    #user32 = ctypes.windll.user32
+    #screensize = user32.GetSystemMetrics(78), user32.GetSystemMetrics(79)
+    window = pygame.display.set_mode((1670, 924))#, pygame.FULLSCREEN)
     pygame.display.set_caption('FAR')
 
     background = Background(bg_images_paths, scale_screen_resolution,
@@ -88,10 +89,6 @@ def main():
 
                 if len(background.enemies) == 0:
                     background.current_level += 1
-                    hero.coordinates = [0, 0]
-                    background.set_enemies_strength()
-                    hero.move(1, 0)
-                    pygame.display.update()
                     if background.current_level == 4:
                         pygame.display.flip()
                         window.fill((0, 0, 0))
@@ -99,12 +96,14 @@ def main():
                         win_obj.draw(window, centralized=True)
                         pygame.display.update()
                         pygame.time.delay(2000)
+                        pygame.display.quit()
+                        pygame.quit()
                         sys.exit()
                     else:
                         hero.coordinates = [0, 0]
                         background.set_enemies_strength()
                         background.draw(background.current_level)
-                    pygame.display.update()
+                        pygame.display.update()
 
 
 if __name__ == '__main__':
