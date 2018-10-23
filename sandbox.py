@@ -87,6 +87,7 @@ def main():
 
                 if len(background.enemies) == 0:
                     background.current_level += 1
+                    hero.coordinates = [0, 0]
                     background.set_enemies_strength()
                     background.draw(background.current_level)
                     pygame.display.update()

@@ -3,6 +3,7 @@ import random
 
 from Entities.battle import Battle
 from Entities.enemy import Enemy
+from text_object import TextObject
 
 pygame.init()
 
@@ -28,6 +29,9 @@ class Background:
     def draw(self, level_number=0):
         self.window.fill((0, 0, 0))
         self.window.blit(self.levels[level_number], (0, 0))
+
+        level = TextObject(825, 25, lambda: 'Level ' + str(self.current_level + 1), (255, 255, 255, 1), 'Consolas', 40)
+        level.draw(self.window, centralized=True)
         
         for enemy in self.enemies:
             enemy.draw()
