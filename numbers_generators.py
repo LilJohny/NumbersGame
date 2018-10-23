@@ -32,9 +32,17 @@ class UlamNumbersGenerator(Generator):
         else:
             return self.sequence[:length]
 
-    def get_random_number(self, max_number_of_sequnce):
-        ulam_sequence = self.get_sequence(max_number_of_sequnce)
+    def get_random_number(self, max_number_of_sequence):
+        ulam_sequence = self.get_sequence(max_number_of_sequence)
         return random.choice(ulam_sequence)
+
+    def is_from_sequence(self, element):
+        length = 1
+        seq = self.get_sequence(length)
+        while seq[len(seq) - 1] < element:
+            length += 1
+            seq = self.get_sequence(length)
+        return element in seq
 
 
 class PrimeNumbersGenerator(Generator):
@@ -42,7 +50,7 @@ class PrimeNumbersGenerator(Generator):
         self.sequence = [2]
 
     def get_sequence(self, length):
-        if(length > len(self.sequence)):
+        if (length > len(self.sequence)):
             last = self.sequence[len(self.sequence) - 1]
 
         else:
@@ -64,11 +72,12 @@ class PrimeNumbersGenerator(Generator):
 
     @staticmethod
     def isPrime(number):
-        for factor in range(2, (number//2)+1):
-            if(number % factor == 0):
+        for factor in range(2, (number // 2) + 1):
+            if (number % factor == 0):
                 return False
 
         return True
+
 
 class Lucky_Numbers_Generator(Generator):
     def __init__(self):
@@ -78,13 +87,13 @@ class Lucky_Numbers_Generator(Generator):
     def ishappy(self, n):
         cache = []
         while n != 1:
-            n = sum(int(i)**2 for i in str(n))
+            n = sum(int(i) ** 2 for i in str(n))
             if n in cache:
                 return False
             cache.append(n)
         return True
 
-    def get_sequence(self,  length_of_list):
+    def get_sequence(self, length_of_list):
         return self.happies[:length_of_list]
 
     def get_random_number(self, max_number_of_sequnce):
