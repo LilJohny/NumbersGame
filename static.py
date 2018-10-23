@@ -20,3 +20,22 @@ def text_hint_5():
 
 def text_hint_6():
     return '- both answers are correct.'
+
+def control_hint_1():
+    return 'If you think that questioned number is: '
+
+
+def control_hint_2():
+    return 'Ulam number - press 1.'
+
+
+def control_hint_3():
+    return 'prime number - press 2.'
+
+
+def control_hint_4():
+    return ' happy number - press 3.'
+
+
+
+

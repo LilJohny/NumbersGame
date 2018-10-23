@@ -131,14 +131,24 @@ class Battle:
         hero_health_bar.draw(self.window)
         self.window.blit(self.opponent.image, (3 * self.resolution[0] // 4 - self.opponent.image.get_width() // 2,
                                                self.resolution[1] // 2 - self.opponent.image.get_height() // 2 - 20))
-        enemy_health_label = TextObject(self.window.get_width() - 400, 10, lambda: self.opponent.name + '`s health: ',
+        enemy_health_label = TextObject(self.window.get_width() - 200, 10, lambda: self.opponent.name + '`s health: ',
                                         (255, 255, 255, 1), 'Consolas', 20)
-        enemy_health_bar = BarObject(self.window.get_width() - 400, 20, self.opponent.max_health, self.opponent.health,
+        enemy_health_bar = BarObject(self.window.get_width() - 220, 20, self.opponent.max_health, self.opponent.health,
                                      (147, 21, 10, 1),
                                      (18, 211, 201, 1), enemy_health_label)
         enemy_health_bar.draw(self.window)
         enemy_name = TextObject(
             3 * self.resolution[0] // 4 - self.opponent.image.get_width() // 2 + self.opponent.image.get_width() // 2,
-            self.resolution[1] // 2 - self.opponent.image.get_height() // 2 - 20,
+            self.resolution[1] // 2 - self.opponent.image.get_height() // 2 - 40,
             lambda: self.opponent.name, (255, 215, 0, 1), 'Consolas', 25)
         enemy_name.draw(self.window, True)
+        control_func = [static.control_hint_1, static.control_hint_2, static.control_hint_3, static.control_hint_4]
+        control_hints = []
+        bias = 0
+        for func in control_func:
+            control_hint = TextObject(10, 3 * self.window.get_height() // 4 + bias, func, (255, 215, 0, 1),
+                                      'Consolas', 20)
+            control_hints.append(control_hint)
+            bias += 30
+        for control_hint in control_hints:
+            control_hint.draw(self.window)
