@@ -20,6 +20,7 @@ class BarObject:
         self.label.draw(window)
         pygame.draw.rect(window, self.bg_color,
                          [self.coordinates[0], self.coordinates[1] + self.label.bounds[3], 200, 30])
-        pygame.draw.rect(window, self.fg_color,
-                         [self.coordinates[0], self.coordinates[1] + self.label.bounds[3],
-                          (self.current_value / self.max_value) * 200, 30])
+        if self.current_value != 0:
+            pygame.draw.rect(window, self.fg_color,
+                             [self.coordinates[0], self.coordinates[1] + self.label.bounds[3],
+                              (self.current_value / self.max_value) * 200, 30])

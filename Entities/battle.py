@@ -29,7 +29,7 @@ class Battle:
         self.generators = [ulam_generator, prime_generator, lucky_generator]
 
         generator = random.choice(self.generators)
-        
+
         self.number = generator.get_random_number(20)
         self.display_next_question(self.number)
         self.previous_answer = generator.get_generator_name()
@@ -49,13 +49,13 @@ class Battle:
         while self.hero.current_health > 0 and self.opponent.health > 0:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
-                    
+
                     pygame.display.update()
 
                     if event.key == pygame.K_1:
                         self.check_answer(self.number, self.generators[0])
 
-                    elif event.key == pygame.K_2: 
+                    elif event.key == pygame.K_2:
                         self.check_answer(self.number, self.generators[1])
 
                     elif event.key == pygame.K_3:
@@ -69,16 +69,11 @@ class Battle:
 
     def check_answer(self, number, generator, length=20):
         if generator.is_from_sequence(number):
-            self.number = self.generate_number()
-            self.display_next_question(self.number)
-            print(self.number)
             self.make_damage()
         else:
-            self.number = self.generate_number()
-            self.display_next_question(self.number)
-            print(self.number)
             self.get_damage()
-
+        self.number = self.generate_number()
+        self.display_next_question(self.number)
         self.previous_answer = self.answer
         pygame.display.update()
 
@@ -91,6 +86,8 @@ class Battle:
         self.opponent.health -= self.hero.max_damage
         alert = TextObject(825, 464, lambda: 'RIGHT ANSWER!', (0, 255, 0, 1), 'Consolas', 30)
         alert.draw(self.window, centralized=True)
+        pygame.display.update()
+        pygame.time.delay(500)
 
     def get_damage(self):
         self.hero.current_health -= self.opponent.damage
@@ -98,6 +95,8 @@ class Battle:
         alert2 = TextObject(825, 474, lambda: self.previous_answer, (0, 0, 255, 1), 'Consolas', 30)
         alert1.draw(self.window, centralized=True)
         alert2.draw(self.window, centralized=True)
+        pygame.display.update()
+        pygame.time.delay(500)
 
     def lose_battle(self):
         print('Battle lost')
