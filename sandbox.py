@@ -101,6 +101,7 @@ def main():
                         hero.coordinates = [0, 0]
                         background.set_enemies_strength()
                         background.draw(background.current_level)
+                        hero.move(1, 0)
                         pygame.display.update()
 
 

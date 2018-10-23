@@ -89,15 +89,15 @@ class Battle:
 
     def make_damage(self):
         self.opponent.health -= self.hero.max_damage
-        alert = TextObject(825, 464, lambda: static.RIGHT_ANSWER, (0, 255, 0, 1), static.CONSOLAS, 30)
+        alert = TextObject(805, 464, lambda: static.RIGHT_ANSWER, (0, 255, 0, 1), static.CONSOLAS, 30)
         alert.draw(self.window, centralized=True)
         pygame.display.update()
         pygame.time.delay(500)
 
     def get_damage(self):
         self.hero.current_health -= self.opponent.damage
-        alert1 = TextObject(825, 454, lambda: 'WRONG ANSWER!', (0, 0, 255, 1), static.CONSOLAS, 30)
-        alert2 = TextObject(825, 484, lambda: self.previous_answer, (0, 0, 255, 1), static.CONSOLAS, 30)
+        alert1 = TextObject(775, 454, lambda: 'WRONG ANSWER!', (0, 0, 255, 1), static.CONSOLAS, 30)
+        alert2 = TextObject(775, 484, lambda: self.previous_answer, (0, 0, 255, 1), static.CONSOLAS, 30)
         alert1.draw(self.window, centralized=True)
         alert2.draw(self.window, centralized=True)
         pygame.display.update()
