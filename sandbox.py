@@ -9,6 +9,10 @@ from static import RIGHT, bg_images_paths, scale_screen_resolution, hero_sprites
 
 
 def main():
+    '''
+    None -> None
+    This function sets hero,background and creates the methods for controlling and commanding hero.
+    '''
     pygame.init()
     window = pygame.display.set_mode((1536, 864), pygame.FULLSCREEN)
     pygame.display.set_caption('FAR')
@@ -90,7 +94,8 @@ def main():
                     if background.current_level == 4:
                         pygame.display.flip()
                         window.fill((0, 0, 0))
-                        win_obj = TextObject(780, 444, lambda: 'YOU ARE PROMOTED', (0, 255, 0, 1), 'Consolas', 70)
+                        win_obj = TextObject(
+                            780, 444, lambda: 'YOU ARE PROMOTED', (0, 255, 0, 1), 'Consolas', 70)
                         win_obj.draw(window, centralized=True)
                         pygame.display.update()
                         pygame.time.delay(2000)

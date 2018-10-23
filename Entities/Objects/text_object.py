@@ -10,15 +10,22 @@ class TextObject:
         self.rect = self.get_surface(text_function())
 
     def draw(self, surface, centralized=False):
+        '''
+        object,Surface,bool -> None
+        Calls a window with text.
+        '''
         text_surface, self.rect = self.get_surface(self.text_func())
         if centralized:
-            pos = (self.coordinates[0] - self.rect.width // 2, self.coordinates[1])
+            pos = (self.coordinates[0] -
+                   self.rect.width // 2, self.coordinates[1])
         else:
             pos = self.coordinates
         surface.blit(text_surface, pos)
 
     def get_surface(self, text):
+        '''
+        object,str -> None
+        Creates a window with text.
+        '''
         text_surface = self.font.render(text, False, self.color)
         return text_surface, text_surface.get_rect()
-
-

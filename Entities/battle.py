@@ -18,9 +18,11 @@ class Battle:
         self.window = window
         self.battle_image = pygame.image.load(battle_image)
         self.resolution = (self.window.get_width(), self.window.get_height())
-        self.battle_image = pygame.transform.scale(self.battle_image, self.resolution)
+        self.battle_image = pygame.transform.scale(
+            self.battle_image, self.resolution)
         self.battle_bg = pygame.image.load(battle_bg)
-        self.battle_bg = pygame.transform.scale(self.battle_bg, self.resolution)
+        self.battle_bg = pygame.transform.scale(
+            self.battle_bg, self.resolution)
         self.hint_funcs = [static.text_hint_1, static.text_hint_2, static.text_hint_3, static.text_hint_4,
                            static.text_hint_5, static.text_hint_6]
         ulam_generator = UlamNumbersGenerator()
@@ -41,12 +43,21 @@ class Battle:
         pass
 
     def display_next_question(self, number):
+        '''
+        object,number -> str
+        Creates and shows a question for the hero.
+        '''
         self.draw_screen()
         text = 'Which sequence contains ' + str(number) + '?'
-        question = TextObject(790, 100, lambda: text, (255, 255, 255, 1), static.CONSOLAS, 20)
+        question = TextObject(790, 100, lambda: text,
+                              (255, 255, 255, 1), static.CONSOLAS, 20)
         question.draw(self.window, centralized=True)
 
     def execute(self):
+        '''
+        object -> None
+        Finishes the battle when it is won or lost.
+        '''
         while self.hero.current_health > 0 and self.opponent.health > 0:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
@@ -73,6 +84,10 @@ class Battle:
             self.lose_battle()
 
     def check_answer(self, number, generator):
+        '''
+        object,number -> None
+        Checks answer together with number generators and makes relevant changes.
+        '''
         if generator.is_from_sequence(number):
             self.make_damage()
         else:
@@ -83,30 +98,50 @@ class Battle:
         pygame.display.update()
 
     def generate_number(self, length=20):
+        '''
+        object,number -> number
+        Generates a random number from number generators
+        '''
         generator = random.choice(self.generators)
         self.answer = generator.get_generator_name()
         return generator.get_random_number(length)
 
     def make_damage(self):
+        '''
+        object -> None
+        Shows the damages of sprites.
+        '''
         self.opponent.health -= self.hero.max_damage
-        alert = TextObject(805, 464, lambda: static.RIGHT_ANSWER, (0, 255, 0, 1), static.CONSOLAS, 30)
+        alert = TextObject(805, 464, lambda: static.RIGHT_ANSWER,
+                           (0, 255, 0, 1), static.CONSOLAS, 30)
         alert.draw(self.window, centralized=True)
         pygame.display.update()
         pygame.time.delay(500)
 
     def get_damage(self):
+        '''
+        object -> None
+        The calculates the damage
+        '''
         self.hero.current_health -= self.opponent.damage
-        alert1 = TextObject(775, 454, lambda: 'WRONG ANSWER!', (0, 0, 255, 1), static.CONSOLAS, 30)
-        alert2 = TextObject(775, 484, lambda: self.previous_answer, (0, 0, 255, 1), static.CONSOLAS, 30)
+        alert1 = TextObject(775, 454, lambda: 'WRONG ANSWER!',
+                            (0, 0, 255, 1), static.CONSOLAS, 30)
+        alert2 = TextObject(775, 484, lambda: self.previous_answer,
+                            (0, 0, 255, 1), static.CONSOLAS, 30)
         alert1.draw(self.window, centralized=True)
         alert2.draw(self.window, centralized=True)
         pygame.display.update()
         pygame.time.delay(500)
 
     def lose_battle(self):
+        '''
+        object -> None
+        Makes changes when the battle is lost.
+        '''
         pygame.display.flip()
         self.window.fill((0, 0, 0))
-        lose_obj = TextObject(780, 444, lambda: static.LOSE_TEXT, (255, 0, 0, 1), static.CONSOLAS, 70)
+        lose_obj = TextObject(780, 444, lambda: static.LOSE_TEXT,
+                              (255, 0, 0, 1), static.CONSOLAS, 70)
         lose_obj.draw(self.window, centralized=True)
         pygame.display.update()
         pygame.time.delay(2000)
@@ -115,6 +150,10 @@ class Battle:
         sys.exit()
 
     def win_battle(self):
+        '''
+        object -> None
+        Makes changes when the battle is won.
+        '''
         self.hero.winner = True
         index = self.hero.background.enemies.index(self.opponent)
         del (self.hero.background.enemies[index])
@@ -123,6 +162,10 @@ class Battle:
         pygame.display.update()
 
     def draw_screen(self):
+        '''
+        object -> None
+        Creates the window for battle mode.
+        '''
         self.window.fill((0, 0, 0))
         self.window.blit(self.battle_bg, (0, 0))
         self.window.blit(self.battle_image, (0, 0))
@@ -134,20 +177,22 @@ class Battle:
         i = 0
         for func in self.hint_funcs:
             hint_piece = TextObject(self.battle_image.get_width() // 2 + 10,
-                                    3 * self.battle_image.get_height() // 4 + i, func
-                                    , (255, 255, 255, 1), static.CONSOLAS, 15)
+                                    3 * self.battle_image.get_height() // 4 + i, func, (255, 255, 255, 1), static.CONSOLAS, 15)
             hint.append(hint_piece)
             i += 20
 
         for var in hint:
             var.draw(self.window, True)
         hero_name = TextObject(
-            self.resolution[0] // 4 - self.hero.battle_image.get_width() // 2 + self.hero.width // 2 + 6,
-            self.resolution[1] // 2 - self.hero.battle_image.get_height() // 2 - 20,
+            self.resolution[0] // 4 - self.hero.battle_image.get_width() // 2 +
+            self.hero.width // 2 + 6,
+            self.resolution[1] // 2 -
+            self.hero.battle_image.get_height() // 2 - 20,
             lambda: 'You',
             (255, 215, 0, 1), static.CONSOLAS, 25)
         hero_name.draw(self.window, True)
-        hero_health_label = TextObject(10, 10, lambda: 'Your health: ', (255, 255, 255, 1), static.CONSOLAS, 20)
+        hero_health_label = TextObject(
+            10, 10, lambda: 'Your health: ', (255, 255, 255, 1), static.CONSOLAS, 20)
         hero_health_bar = BarObject(20, 20, self.hero.max_health, self.hero.current_health, (147, 21, 10, 1),
                                     (14, 108, 23, 1), hero_health_label)
         hero_health_bar.draw(self.window)
@@ -160,11 +205,14 @@ class Battle:
                                      (14, 108, 23, 1), enemy_health_label)
         enemy_health_bar.draw(self.window)
         enemy_name = TextObject(
-            3 * self.resolution[0] // 4 - self.opponent.image.get_width() // 2 + self.opponent.image.get_width() // 2,
-            self.resolution[1] // 2 - self.opponent.image.get_height() // 2 - 40,
+            3 * self.resolution[0] // 4 - self.opponent.image.get_width() // 2 +
+            self.opponent.image.get_width() // 2,
+            self.resolution[1] // 2 -
+            self.opponent.image.get_height() // 2 - 40,
             lambda: self.opponent.name, (255, 215, 0, 1), static.CONSOLAS, 25)
         enemy_name.draw(self.window, True)
-        control_func = [static.control_hint_1, static.control_hint_2, static.control_hint_3, static.control_hint_4]
+        control_func = [static.control_hint_1, static.control_hint_2,
+                        static.control_hint_3, static.control_hint_4]
         control_hints = []
         bias = 0
         for func in control_func:
