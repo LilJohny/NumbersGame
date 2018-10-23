@@ -33,15 +33,15 @@ class Hero(Creature):
 
     def draw(self, direction):
         if direction == 'right':
-            self.background.window.blit(self.images_right[self.animation_count // 6], self.coordinates)
+            self.background.window.blit(self.images_right[self.animation_count // 12], self.coordinates)
             self.animation_count += 1
         if direction == 'left':
-            self.background.window.blit(self.images_left[self.animation_count // 6], self.coordinates)
+            self.background.window.blit(self.images_left[self.animation_count // 12], self.coordinates)
             self.animation_count += 1
         if direction == 'up' or direction == 'down':
-            self.background.window.blit(self.images_idle[self.animation_count // 15], self.coordinates)
+            self.background.window.blit(self.images_idle[self.animation_count // 30], self.coordinates)
             self.animation_count += 1
-        if self.animation_count >= 30:
+        if self.animation_count >= 60:
             self.animation_count = 0
         pygame.display.update()
 

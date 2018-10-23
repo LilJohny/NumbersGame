@@ -3,6 +3,7 @@ import random
 from Entities.enemy import Enemy
 from Entities.hero import Hero
 from text_object import TextObject
+from bar_object import BarObject
 from numbers_generators import Lucky_Numbers_Generator, PrimeNumbersGenerator, UlamNumbersGenerator
 import static
 
@@ -20,8 +21,7 @@ class Battle:
         self.battle_bg = pygame.image.load(battle_bg)
         self.battle_bg = pygame.transform.scale(self.battle_bg, self.resolution)
         self.hint_funcs = [static.text_hint_1, static.text_hint_2, static.text_hint_3, static.text_hint_4,
-                      static.text_hint_5, static.text_hint_6]
-
+                           static.text_hint_5, static.text_hint_6]
         ulam_generator = UlamNumbersGenerator()
         prime_generator = PrimeNumbersGenerator()
         lucky_generator = Lucky_Numbers_Generator()
@@ -40,7 +40,6 @@ class Battle:
         text = 'Which sequence contains ' + str(number) + '?'
         question = TextObject(835, 100, lambda: text, (255, 255, 255, 1), 'Consolas', 30)
         question.draw(self.window, centralized=True)
-
 
     def execute(self):
         while self.hero.current_health > 0 and self.opponent.health > 0:
@@ -72,7 +71,7 @@ class Battle:
         else:
             self.get_damage()
 
-        #TODO: output right answer
+        # TODO: output right answer
 
         pygame.display.update()
 
@@ -80,18 +79,15 @@ class Battle:
         generator = random.choice(self.generators)
         return generator.get_random_number(length)
 
-
     def make_damage(self):
         self.opponent.health -= self.hero.max_damage
         alert = TextObject(700, 700, lambda: 'RIGHT ANSWER!', (0, 255, 0, 1), 'Consolas', 30)
         alert.draw(self.window)
 
-
     def get_damage(self):
         self.hero.current_health -= self.opponent.damage
         alert = TextObject(1400, 700, lambda: 'WRONG ANSWER!', (211, 23, 23, 1), 'Consolas', 30)
         alert.draw(self.window)
-
 
     def lose_battle(self):
         print('Battle lost')
@@ -101,7 +97,7 @@ class Battle:
         index = self.hero.background.enemies.index(self.opponent)
         del (self.hero.background.enemies[index])
         self.hero.background.draw()
-        del(self)
+        del (self)
         pygame.display.update()
 
     def draw_screen(self):
@@ -112,7 +108,7 @@ class Battle:
             self.resolution[0] // 4 - self.hero.battle_image.get_width() // 2,
             self.resolution[1] // 2 - self.hero.battle_image.get_height() // 2))
         hint = []
-        
+
         i = 0
         for func in self.hint_funcs:
             hint_piece = TextObject(self.battle_image.get_width() // 2 + 10,
@@ -129,12 +125,20 @@ class Battle:
             lambda: 'You',
             (255, 215, 0, 1), 'Consolas', 25)
         hero_name.draw(self.window, True)
-
+        hero_health_label = TextObject(10, 10, lambda: 'Your health: ', (255, 255, 255, 1), 'Consolas', 20)
+        hero_health_bar = BarObject(20, 20, self.hero.max_health, self.hero.current_health, (147, 21, 10, 1),
+                                    (18, 211, 201, 1), hero_health_label)
+        hero_health_bar.draw(self.window)
         self.window.blit(self.opponent.image, (3 * self.resolution[0] // 4 - self.opponent.image.get_width() // 2,
-                                               self.resolution[1] // 2 - self.opponent.image.get_height() // 2))
+                                               self.resolution[1] // 2 - self.opponent.image.get_height() // 2 - 20))
+        enemy_health_label = TextObject(self.window.get_width() - 400, 10, lambda: self.opponent.name + '`s health: ',
+                                        (255, 255, 255, 1), 'Consolas', 20)
+        enemy_health_bar = BarObject(self.window.get_width() - 400, 20, self.opponent.max_health, self.opponent.health,
+                                     (147, 21, 10, 1),
+                                     (18, 211, 201, 1), enemy_health_label)
+        enemy_health_bar.draw(self.window)
         enemy_name = TextObject(
             3 * self.resolution[0] // 4 - self.opponent.image.get_width() // 2 + self.opponent.image.get_width() // 2,
             self.resolution[1] // 2 - self.opponent.image.get_height() // 2 - 20,
             lambda: self.opponent.name, (255, 215, 0, 1), 'Consolas', 25)
         enemy_name.draw(self.window, True)
-

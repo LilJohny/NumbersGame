@@ -23,7 +23,7 @@ def main():
     clock = pygame.time.Clock()
     playing = True
     while playing:
-        clock.tick(40)
+        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 playing = False
