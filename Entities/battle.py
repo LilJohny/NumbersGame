@@ -43,7 +43,7 @@ class Battle:
     def display_next_question(self, number):
         self.draw_screen()
         text = 'Which sequence contains ' + str(number) + '?'
-        question = TextObject(835, 100, lambda: text, (255, 255, 255, 1), static.CONSOLAS, 30)
+        question = TextObject(790, 100, lambda: text, (255, 255, 255, 1), static.CONSOLAS, 20)
         question.draw(self.window, centralized=True)
 
     def execute(self):
@@ -72,7 +72,7 @@ class Battle:
         else:
             self.lose_battle()
 
-    def check_answer(self, number, generator, length=20):
+    def check_answer(self, number, generator):
         if generator.is_from_sequence(number):
             self.make_damage()
         else:
@@ -153,7 +153,7 @@ class Battle:
         hero_health_bar.draw(self.window)
         self.window.blit(self.opponent.image, (3 * self.resolution[0] // 4 - self.opponent.image.get_width() // 2,
                                                self.resolution[1] // 2 - self.opponent.image.get_height() // 2 - 20))
-        enemy_health_label = TextObject(self.window.get_width() - 200, 10, lambda: self.opponent.name + '`s health: ',
+        enemy_health_label = TextObject(self.window.get_width() - 300, 10, lambda: self.opponent.name + '`s health: ',
                                         (255, 255, 255, 1), static.CONSOLAS, 20)
         enemy_health_bar = BarObject(self.window.get_width() - 220, 20, self.opponent.max_health, self.opponent.health,
                                      (147, 21, 10, 1),

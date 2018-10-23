@@ -8,8 +8,14 @@ DOWN = 'down'
 
 LOSE_TEXT = 'YOU ARE FIRED'
 
+BOSS_IMAGE_PATH = 'sprites/boss.png'
+
+BATTLE_IMAGE_PATH = 'sprites/battle.png'
+
+BATTLE_BG_IMAGE_PATH = 'sprites/battle_bg.jpg'
 CONSOLAS = 'Consolas'
-enemies_names = [['AttributeError', 'NameError', 'AttributeError'], [], [], []]
+enemies_names = [['AttributeError', 'NameError', 'AttributeError'], ['KeyError', 'TypeError', 'AttributeError'],
+                 ['KeyError', 'AttributeError', 'TypeError'], ['Can\'t run on battery']]
 RIGHT_ANSWER = 'RIGHT ANSWER!'
 scale_screen_resolution = (1918, 1074)
 
