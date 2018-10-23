@@ -18,8 +18,8 @@ def main():
 
     background.draw()
 
-    hero = Hero(hero_sprites_paths, 0, 0, 100, 125, 2000,
-                1000,
+    hero = Hero(hero_sprites_paths, 0, 0, 100, 125, 100,
+                20,
                 40, background)
     hero.draw(RIGHT)
     clock = pygame.time.Clock()
