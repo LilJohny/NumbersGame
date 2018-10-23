@@ -11,6 +11,10 @@ class Generator():
     def get_random_number(self, max_number_of_sequnce):
         pass
 
+    def is_from_sequence(self, element):
+        pass
+
+
 
 class UlamNumbersGenerator(Generator):
     def __init__(self):
@@ -66,6 +70,9 @@ class PrimeNumbersGenerator(Generator):
 
         return self.sequence
 
+    def is_from_sequence(self, element):
+        return self.isPrime(element)
+
     def get_random_number(self, max_number_of_sequnce):
         prime_sequence = self.get_sequence(max_number_of_sequnce)
         return random.choice(prime_sequence)
@@ -105,3 +112,7 @@ class Lucky_Numbers_Generator(Generator):
             if self.ishappy(i):
                 self.happies.append(i)
         return self.happies
+
+    def is_from_sequence(self, element):
+        return self.ishappy(element)
+
