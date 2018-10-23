@@ -39,7 +39,7 @@ class Hero(Creature):
             self.background.window.blit(self.images_left[self.animation_count // 6], self.coordinates)
             self.animation_count += 1
         if direction == 'up' or direction == 'down':
-            self.background.window.blit(self.images_left[self.animation_count // 15], self.coordinates)
+            self.background.window.blit(self.images_idle[self.animation_count // 15], self.coordinates)
             self.animation_count += 1
         if self.animation_count >= 30:
             self.animation_count = 0

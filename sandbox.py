@@ -36,6 +36,8 @@ def main():
                             hero.move(hero.speed, 0)
                         for stop_event in pygame.event.get():
                             if (stop_event.type == pygame.KEYUP and stop_event.key == event.key) or hero.winner:
+                                if hero.winner:
+                                    hero.draw('right')
                                 hero.winner = False
                                 moving = False
                                 break
@@ -46,6 +48,8 @@ def main():
                             hero.move(-hero.speed, 0)
                         for stop_event in pygame.event.get():
                             if (stop_event.type == pygame.KEYUP and stop_event.key == event.key) or hero.winner:
+                                if hero.winner:
+                                    hero.draw('left')
                                 hero.winner = False
                                 moving = False
                                 break
@@ -56,6 +60,8 @@ def main():
                             hero.move(0, -hero.speed)
                         for stop_event in pygame.event.get():
                             if (stop_event.type == pygame.KEYUP and stop_event.key == event.key) or hero.winner:
+                                if hero.winner:
+                                    hero.draw('up')
                                 hero.winner = False
                                 moving = False
                                 break
@@ -66,6 +72,8 @@ def main():
                             hero.move(0, hero.speed)
                         for stop_event in pygame.event.get():
                             if (stop_event.type == pygame.KEYUP and stop_event.key == event.key) or hero.winner:
+                                if hero.winner:
+                                    hero.draw('down')
                                 hero.winner = False
                                 moving = False
                                 break
