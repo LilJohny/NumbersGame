@@ -1,5 +1,5 @@
 import pygame
-from text_object import TextObject
+from Entities.Objects.text_object import TextObject
 
 pygame.init()
 

@@ -2,8 +2,8 @@ import pygame
 import random
 from Entities.enemy import Enemy
 from Entities.hero import Hero
-from text_object import TextObject
-from bar_object import BarObject
+from Entities.Objects.text_object import TextObject
+from Entities.Objects.bar_object import BarObject
 from numbers_generators import Lucky_Numbers_Generator, PrimeNumbersGenerator, UlamNumbersGenerator
 import static
 
@@ -106,7 +106,7 @@ class Battle:
         index = self.hero.background.enemies.index(self.opponent)
         del (self.hero.background.enemies[index])
         self.hero.background.draw()
-        del (self)
+        del self
         pygame.display.update()
 
     def draw_screen(self):
@@ -136,7 +136,7 @@ class Battle:
         hero_name.draw(self.window, True)
         hero_health_label = TextObject(10, 10, lambda: 'Your health: ', (255, 255, 255, 1), 'Consolas', 20)
         hero_health_bar = BarObject(20, 20, self.hero.max_health, self.hero.current_health, (147, 21, 10, 1),
-                                    (18, 211, 201, 1), hero_health_label)
+                                    (14, 108, 23, 1), hero_health_label)
         hero_health_bar.draw(self.window)
         self.window.blit(self.opponent.image, (3 * self.resolution[0] // 4 - self.opponent.image.get_width() // 2,
                                                self.resolution[1] // 2 - self.opponent.image.get_height() // 2 - 20))
@@ -144,7 +144,7 @@ class Battle:
                                         (255, 255, 255, 1), 'Consolas', 20)
         enemy_health_bar = BarObject(self.window.get_width() - 220, 20, self.opponent.max_health, self.opponent.health,
                                      (147, 21, 10, 1),
-                                     (18, 211, 201, 1), enemy_health_label)
+                                     (14, 108, 23, 1), enemy_health_label)
         enemy_health_bar.draw(self.window)
         enemy_name = TextObject(
             3 * self.resolution[0] // 4 - self.opponent.image.get_width() // 2 + self.opponent.image.get_width() // 2,
