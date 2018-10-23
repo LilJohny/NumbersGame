@@ -106,7 +106,7 @@ class Battle:
         lose_obj = TextObject(825, 464, lambda: 'YOU ARE FIRED', (255, 0, 0, 1), 'Consolas', 70)
         lose_obj.draw(self.window, centralized=True)
         pygame.display.update()
-        pygame.time.delay(5000)
+        pygame.time.delay(2000)
         sys.exit()
 
     def win_battle(self):

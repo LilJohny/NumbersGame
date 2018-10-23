@@ -1,6 +1,7 @@
 import pygame
 from Entities.background import Background
 from Entities.hero import Hero
+from Entities.Objects.text_object import TextObject
 
 
 def main():
@@ -87,10 +88,20 @@ def main():
 
                 if len(background.enemies) == 0:
                     background.current_level += 1
-                    hero.coordinates = [0, 0]
-                    background.set_enemies_strength()
-                    background.draw(background.current_level)
-                    pygame.display.update()
+
+                    if background.current_level == 4:
+                        pygame.display.flip()
+                        window.fill((0, 0, 0))
+                        win_obj = TextObject(825, 464, lambda: 'YOU ARE PROMOTED', (0, 255, 0, 1), 'Consolas', 70)
+                        win_obj.draw(window, centralized=True)
+                        pygame.display.update()
+                        pygame.time.delay(2000)
+                        sys.exit()
+                    else:
+                        hero.coordinates = [0, 0]
+                        background.set_enemies_strength()
+                        background.draw(background.current_level)
+                        pygame.display.update()
 
 
 if __name__ == '__main__':
