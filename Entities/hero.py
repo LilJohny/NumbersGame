@@ -1,5 +1,6 @@
 from .creature import Creature
 import pygame
+from static import RIGHT, LEFT, DOWN, UP
 
 pygame.init()
 
@@ -19,7 +20,7 @@ class Hero(Creature):
                 self.battle_image = image
             if image_name.count('idle') == 1:
                 self.images_idle.append(image)
-            elif image_name.count('right') == 1:
+            elif image_name.count(RIGHT) == 1:
                 self.images_right.append(image)
             else:
                 self.images_left.append(image)
@@ -32,13 +33,13 @@ class Hero(Creature):
         self.speed = speed
 
     def draw(self, direction):
-        if direction == 'right':
+        if direction == RIGHT:
             self.background.window.blit(self.images_right[self.animation_count // 12], self.coordinates)
             self.animation_count += 1
-        if direction == 'left':
+        if direction == LEFT:
             self.background.window.blit(self.images_left[self.animation_count // 12], self.coordinates)
             self.animation_count += 1
-        if direction == 'up' or direction == 'down':
+        if direction == UP or direction == DOWN:
             self.background.window.blit(self.images_idle[self.animation_count // 30], self.coordinates)
             self.animation_count += 1
         if self.animation_count >= 60:
@@ -49,13 +50,13 @@ class Hero(Creature):
         self.coordinates[0] += x
         self.coordinates[1] += y
         if x > 0:
-            direction = 'right'
+            direction = RIGHT
         elif x < 0:
-            direction = 'left'
+            direction = LEFT
         elif y > 0:
-            direction = 'up'
+            direction = UP
         elif y < 0:
-            direction = 'down'
+            direction = DOWN
         self.background.draw(self.background.current_level)
         self.draw(direction)
         self.check_if_battle_needed()

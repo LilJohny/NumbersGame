@@ -1,27 +1,28 @@
+import ctypes
+
 import pygame
+
 from Entities.background import Background
 from Entities.hero import Hero
+from static import RIGHT, bg_images_paths, scale_screen_resolution, hero_sprites_paths
 
 
 def main():
     pygame.init()
-    window = pygame.display.set_mode((1650, 928))
-    # window = pygame.display.set_mode((1800, 850), pygame.FULLSCREEN)
+    user32 = ctypes.windll.user32
+    screensize = user32.GetSystemMetrics(78), user32.GetSystemMetrics(79)
+    window = pygame.display.set_mode(screensize, pygame.FULLSCREEN)
     pygame.display.set_caption('FAR')
 
-    level = 0
-
-    background = Background(['sprites/bg1.png', 'sprites/bg2.png', 'sprites/bg3.png', 'sprites/bg4.png'], (1918, 1074),
+    background = Background(bg_images_paths, scale_screen_resolution,
                             window)
+
     background.draw()
 
-    hero = Hero(['sprites/idle_left.png', 'sprites/idle_right.png', 'sprites/run_left_1.png', 'sprites/run_left_2.png',
-                 'sprites/run_left_3.png', 'sprites/run_left_4.png', 'sprites/run_left_5.png',
-                 'sprites/run_right_1.png', 'sprites/run_right_2.png', 'sprites/run_right_3.png',
-                 'sprites/run_right_4.png', 'sprites/run_right_5.png', 'sprites/idle_battle.png'], 0, 0, 100, 125, 100,
+    hero = Hero(hero_sprites_paths, 0, 0, 100, 125, 100,
                 20,
                 40, background)
-    hero.draw('right')
+    hero.draw(RIGHT)
     clock = pygame.time.Clock()
     playing = True
     while playing:
@@ -89,7 +90,7 @@ def main():
                     background.current_level += 1
                     hero.coordinates = [0, 0]
                     background.set_enemies_strength()
-                    background.draw(background.current_level)
+                    hero.move(1, 0)
                     pygame.display.update()
 
 

@@ -4,15 +4,14 @@ import random
 from Entities.battle import Battle
 from Entities.enemy import Enemy
 from Entities.Objects.text_object import TextObject
-
+from static import enemies_sprites
 pygame.init()
 
 
 class Background:
 
     def __init__(self, image_names, resolution, window):
-        self.enemies_sprites = ['sprites/enemy0.png', 'sprites/enemy1.png', 'sprites/enemy2.png', 'sprites/enemy3.png',
-                                'sprites/enemy4.png', 'sprites/enemy5.png']
+        self.enemies_sprites = enemies_sprites
         self.current_level = 0
         self.enemies_locations = [[(1000, 50), (220, 500), (300, 700)], [(600, 85), (1070, 270), (250, 600)],
                                   [(470, 180), (625, 600), (1050, 650)], [(1000, 20), (100, 500), (200, 700)]]
