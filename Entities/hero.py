@@ -23,6 +23,7 @@ class Hero(Creature):
                 self.images_right.append(image)
             else:
                 self.images_left.append(image)
+        self.winner = False
         self.width = width
         self.height = height
         self.animation_count = 0

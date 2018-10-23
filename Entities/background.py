@@ -41,4 +41,4 @@ class Background:
     def start_battle(self, hero, opponent):
         print("Start Battle")
         battle = Battle(hero, opponent, self.window, 'sprites/battle.png')
-        #battle.execute()
+        battle.execute()

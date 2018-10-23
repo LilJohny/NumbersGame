@@ -35,7 +35,8 @@ def main():
                         if hero.coordinates[0] < window.get_width() - hero.width - 10:
                             hero.move(hero.speed, 0)
                         for stop_event in pygame.event.get():
-                            if stop_event.type == pygame.KEYUP and stop_event.key == event.key:
+                            if (stop_event.type == pygame.KEYUP and stop_event.key == event.key) or hero.winner:
+                                hero.winner = False
                                 moving = False
                                 break
                 elif event.key == pygame.K_LEFT:
@@ -44,7 +45,8 @@ def main():
                         if hero.coordinates[0] >= 10:
                             hero.move(-hero.speed, 0)
                         for stop_event in pygame.event.get():
-                            if stop_event.type == pygame.KEYUP and stop_event.key == event.key:
+                            if (stop_event.type == pygame.KEYUP and stop_event.key == event.key) or hero.winner:
+                                hero.winner = False
                                 moving = False
                                 break
                 elif event.key == pygame.K_UP:
@@ -53,7 +55,8 @@ def main():
                         if hero.coordinates[1] >= 5:
                             hero.move(0, -hero.speed)
                         for stop_event in pygame.event.get():
-                            if stop_event.type == pygame.KEYUP and stop_event.key == event.key:
+                            if (stop_event.type == pygame.KEYUP and stop_event.key == event.key) or hero.winner:
+                                hero.winner = False
                                 moving = False
                                 break
                 elif event.key == pygame.K_DOWN:
@@ -62,9 +65,14 @@ def main():
                         if hero.coordinates[1] < window.get_height() - hero.height:
                             hero.move(0, hero.speed)
                         for stop_event in pygame.event.get():
-                            if stop_event.type == pygame.KEYUP and stop_event.key == event.key:
+                            if (stop_event.type == pygame.KEYUP and stop_event.key == event.key) or hero.winner:
+                                hero.winner = False
                                 moving = False
                                 break
+
+                elif event.key == pygame.K_ESCAPE:
+                    playing = False
+                    break
 
 
 if __name__ == '__main__':
