@@ -14,6 +14,9 @@ class Generator():
     def is_from_sequence(self, element):
         pass
 
+    def get_generator_name(self):
+        pass
+
 
 
 class UlamNumbersGenerator(Generator):
@@ -48,6 +51,9 @@ class UlamNumbersGenerator(Generator):
             seq = self.get_sequence(length)
         return element in seq
 
+    def get_generator_name(self):
+        return 'It is Ulam sequence'
+
 
 class PrimeNumbersGenerator(Generator):
     def __init__(self, *args, **kwargs):
@@ -71,11 +77,17 @@ class PrimeNumbersGenerator(Generator):
         return self.sequence
 
     def is_from_sequence(self, element):
+        if(element == 2):
+            return True
+
         return self.isPrime(element)
 
     def get_random_number(self, max_number_of_sequnce):
         prime_sequence = self.get_sequence(max_number_of_sequnce)
         return random.choice(prime_sequence)
+
+    def get_generator_name(self):
+        return 'It is Prime sequence'
 
     @staticmethod
     def isPrime(number):
@@ -116,3 +128,5 @@ class Lucky_Numbers_Generator(Generator):
     def is_from_sequence(self, element):
         return self.ishappy(element)
 
+    def get_generator_name(self):
+        return 'It is Happy sequence'
