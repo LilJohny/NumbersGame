@@ -1,29 +1,35 @@
+import sys
+
 import pygame
+
+from Entities.Objects.text_object import TextObject
 from Entities.background import Background
 from Entities.hero import Hero
+from static import RIGHT, bg_images_paths, scale_screen_resolution, hero_sprites_paths
 
 
 def main():
+    '''
+    None -> None
+    This function sets hero,background and creates the methods for controlling and commanding hero.
+    '''
     pygame.init()
-    window = pygame.display.set_mode((1650, 928))
-    # window = pygame.display.set_mode((1800, 850), pygame.FULLSCREEN)
+    window = pygame.display.set_mode((1536, 864), pygame.FULLSCREEN)
     pygame.display.set_caption('FAR')
 
-    background = Background(['sprites/bg1.png', 'sprites/bg2.png', 'sprites/bg3.png', 'sprites/bg4.png'], (1918, 1074),
+    background = Background(bg_images_paths, scale_screen_resolution,
                             window)
+
     background.draw()
 
-    hero = Hero(['sprites/idle_left.png', 'sprites/idle_right.png', 'sprites/run_left_1.png', 'sprites/run_left_2.png',
-                 'sprites/run_left_3.png', 'sprites/run_left_4.png', 'sprites/run_left_5.png',
-                 'sprites/run_right_1.png', 'sprites/run_right_2.png', 'sprites/run_right_3.png',
-                 'sprites/run_right_4.png', 'sprites/run_right_5.png', 'sprites/idle_battle.png'], 0, 0, 100, 125, 100,
+    hero = Hero(hero_sprites_paths, 0, 0, 100, 125, 100,
                 20,
                 40, background)
-    hero.draw('right')
+    hero.draw(RIGHT)
     clock = pygame.time.Clock()
     playing = True
     while playing:
-        clock.tick(40)
+        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 playing = False
@@ -82,6 +88,26 @@ def main():
                 elif event.key == pygame.K_ESCAPE:
                     playing = False
                     break
+
+                if len(background.enemies) == 0:
+                    background.current_level += 1
+                    if background.current_level == 4:
+                        pygame.display.flip()
+                        window.fill((0, 0, 0))
+                        win_obj = TextObject(
+                            780, 444, lambda: 'YOU ARE PROMOTED', (0, 255, 0, 1), 'Consolas', 70)
+                        win_obj.draw(window, centralized=True)
+                        pygame.display.update()
+                        pygame.time.delay(2000)
+                        pygame.display.quit()
+                        pygame.quit()
+                        sys.exit()
+                    else:
+                        hero.coordinates = [0, 0]
+                        background.set_enemies_strength()
+                        background.draw(background.current_level)
+                        hero.move(1, 0)
+                        pygame.display.update()
 
 
 if __name__ == '__main__':
