@@ -5,7 +5,7 @@ from Entities.enemy import Enemy
 from Entities.hero import Hero
 from Entities.Objects.text_object import TextObject
 from Entities.Objects.bar_object import BarObject
-from numbers_generators import Lucky_Numbers_Generator, PrimeNumbersGenerator, UlamNumbersGenerator
+from numbers_generators import LuckyNumbersGenerator, PrimeNumbersGenerator, UlamNumbersGenerator
 import static
 
 pygame.init()
@@ -27,7 +27,7 @@ class Battle:
                            static.text_hint_5, static.text_hint_6]
         ulam_generator = UlamNumbersGenerator()
         prime_generator = PrimeNumbersGenerator()
-        lucky_generator = Lucky_Numbers_Generator()
+        lucky_generator = LuckyNumbersGenerator()
 
         self.generators = [ulam_generator, prime_generator, lucky_generator]
 
@@ -35,7 +35,7 @@ class Battle:
 
         self.number = generator.get_random_number(20)
         self.display_next_question(self.number)
-        self.previous_answer = generator.get_generator_name()
+        self.previous_answer = generator.get_generator_name
 
         pygame.display.update()
 
@@ -43,10 +43,10 @@ class Battle:
         pass
 
     def display_next_question(self, number):
-        '''
+        """
         object,number -> str
         Creates and shows a question for the hero.
-        '''
+        """
         self.draw_screen()
         text = 'Which sequence contains ' + str(number) + '?'
         question = TextObject(790, 100, lambda: text,
@@ -54,10 +54,10 @@ class Battle:
         question.draw(self.window, centralized=True)
 
     def execute(self):
-        '''
+        """
         object -> None
         Finishes the battle when it is won or lost.
-        '''
+        """
         while self.hero.current_health > 0 and self.opponent.health > 0:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
@@ -84,10 +84,10 @@ class Battle:
             self.lose_battle()
 
     def check_answer(self, number, generator):
-        '''
+        """
         object,number -> None
         Checks answer together with number generators and makes relevant changes.
-        '''
+        """
         if generator.is_from_sequence(number):
             self.make_damage()
         else:
@@ -98,19 +98,19 @@ class Battle:
         pygame.display.update()
 
     def generate_number(self, length=20):
-        '''
+        """
         object,number -> number
         Generates a random number from number generators
-        '''
+        """
         generator = random.choice(self.generators)
-        self.answer = generator.get_generator_name()
+        self.answer = generator.get_generator_name
         return generator.get_random_number(length)
 
     def make_damage(self):
-        '''
+        """
         object -> None
         Shows the damages of sprites.
-        '''
+        """
         self.opponent.health -= self.hero.max_damage
         alert = TextObject(805, 464, lambda: static.RIGHT_ANSWER,
                            (0, 255, 0, 1), static.CONSOLAS, 30)
@@ -119,10 +119,10 @@ class Battle:
         pygame.time.delay(500)
 
     def get_damage(self):
-        '''
+        """
         object -> None
         The calculates the damage
-        '''
+        """
         self.hero.current_health -= self.opponent.damage
         alert1 = TextObject(775, 454, lambda: 'WRONG ANSWER!',
                             (0, 0, 255, 1), static.CONSOLAS, 30)
@@ -134,10 +134,10 @@ class Battle:
         pygame.time.delay(500)
 
     def lose_battle(self):
-        '''
+        """
         object -> None
         Makes changes when the battle is lost.
-        '''
+        """
         pygame.display.flip()
         self.window.fill((0, 0, 0))
         lose_obj = TextObject(780, 444, lambda: static.LOSE_TEXT,
@@ -150,10 +150,10 @@ class Battle:
         sys.exit()
 
     def win_battle(self):
-        '''
+        """
         object -> None
         Makes changes when the battle is won.
-        '''
+        """
         self.hero.winner = True
         index = self.hero.background.enemies.index(self.opponent)
         del (self.hero.background.enemies[index])
@@ -162,10 +162,10 @@ class Battle:
         pygame.display.update()
 
     def draw_screen(self):
-        '''
+        """
         object -> None
         Creates the window for battle mode.
-        '''
+        """
         self.window.fill((0, 0, 0))
         self.window.blit(self.battle_bg, (0, 0))
         self.window.blit(self.battle_image, (0, 0))
@@ -177,7 +177,11 @@ class Battle:
         i = 0
         for func in self.hint_funcs:
             hint_piece = TextObject(self.battle_image.get_width() // 2 + 10,
-                                    3 * self.battle_image.get_height() // 4 + i, func, (255, 255, 255, 1), static.CONSOLAS, 15)
+                                    3 * self.battle_image.get_height() // 4 + i,
+                                    func,
+                                    (255, 255, 255, 1),
+                                    static.CONSOLAS,
+                                    15)
             hint.append(hint_piece)
             i += 20
 

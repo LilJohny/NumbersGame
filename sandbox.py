@@ -9,10 +9,10 @@ from static import RIGHT, bg_images_paths, scale_screen_resolution, hero_sprites
 
 
 def main():
-    '''
+    """
     None -> None
     This function sets hero,background and creates the methods for controlling and commanding hero.
-    '''
+    """
     pygame.init()
     window = pygame.display.set_mode((1536, 864), pygame.FULLSCREEN)
     pygame.display.set_caption('FAR')

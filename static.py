@@ -33,80 +33,80 @@ enemies_sprites = ['sprites/enemy0.png', 'sprites/enemy1.png', 'sprites/enemy2.p
 
 
 def text_hint_1():
-    '''
+    """
     None -> str
-    Rerurns the following string 'To beat your opponent,'
-    '''
+    Returns the following string 'To beat your opponent,'
+    """
     return 'To beat your opponent,'
 
 
 def text_hint_2():
-    '''
+    """
     None -> str
-    Rerurns the following string 'you should determine'
-    '''
+    Returns the following string 'you should determine'
+    """
     return 'you should determine'
 
 
 def text_hint_3():
-    '''
+    """
     None -> str
-    Rerurns the following string 'which sequence contains'
-    '''
+    Returns the following string 'which sequence contains'
+    """
     return 'which sequence contains'
 
 
 def text_hint_4():
-    '''
+    """
     None -> str
-    Rerurns the following string 'questioned number, if 2 sequences'
-    '''
+    Returns the following string 'questioned number, if 2 sequences'
+    """
     return ' questioned number, if 2 sequences'
 
 
 def text_hint_5():
-    '''
+    """
     None -> str
-    Rerurns the following string 'contain number'
-    '''
+    Returns the following string 'contain number'
+    """
     return 'contain number'
 
 
 def text_hint_6():
-    '''
+    """
     None -> str
-    Rerurns the following string '- both answers are correct.'
-    '''
+    Returns the following string '- both answers are correct.'
+    """
     return '- both answers are correct.'
 
 
 def control_hint_1():
-    '''
+    """
     None -> str
-    Rerurns the following string 'If you think that questioned number is: '
-    '''
+    Returns the following string 'If you think that questioned number is: '
+    """
     return 'If you think that questioned number is: '
 
 
 def control_hint_2():
-    '''
+    """
     None -> str
-    Rerurns the following string 'Ulam number - press 1.'
-    '''
+    Returns the following string 'Ulam number - press 1.'
+    """
     return 'Ulam number - press 1.'
 
 
 def control_hint_3():
-    '''
+    """
     None -> str
-    Rerurns the following string 'Ulam number - press 2.'
-    '''
+    Returns the following string 'Ulam number - press 2.'
+    """
     return 'Prime number - press 2.'
 
 
 def control_hint_4():
-    '''
+    """
     None -> str
-    Rerurns the following string 'Ulam number - press 3.'
-    '''
+    Returns the following string 'Ulam number - press 3.'
+    """
     return 'Happy number - press 3.'

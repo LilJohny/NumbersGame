@@ -14,17 +14,17 @@ class BarObject:
         self.label = label
 
     def update_value(self, value):
-        '''
+        """
         object,number->None
         Updates current value of bar.
-        '''
+        """
         self.current_value = value
 
     def draw(self, window):
-        '''
+        """
         object,Surface -> None
         Creates and shows a window of bar.
-        '''
+        """
         self.label.draw(window)
         pygame.draw.rect(window, self.bg_color,
                          [self.coordinates[0], self.coordinates[1] + self.label.rect[3], 200, 30])
